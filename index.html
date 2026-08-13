@@ -1,0 +1,733 @@
+ <!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HBD RENATA ⛏️ — Tambang Ucapan Spesial</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛏️</text></svg>">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/russo-one@5/index.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/rubik@5/index.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/rubik@5/700.css">
+<style>
+  :root{
+    --yellow:#f7c948; --yellow2:#ffd166; --orange:#ff7f11; --orange2:#e85d04;
+    --brown:#7f5539; --brownD:#3b2a1a; --dirt:#4a3222; --gray:#8d8d8d;
+    --ink:#171310; --cream:#fff6e3;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    font-family:'Rubik',system-ui,sans-serif;
+    background:#241009;color:var(--cream);
+    overflow-x:hidden;min-height:100svh;
+  }
+
+  /* ============ SCENE ============ */
+  .scene{position:fixed;inset:0;overflow:hidden;z-index:0;
+    background:linear-gradient(180deg,#241009 0%,#5e2f10 32%,#c96a1f 58%,#ffb45e 78%,#ffd98a 100%);}
+  .scene::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:13;
+    background:radial-gradient(120% 95% at 50% 38%,transparent 55%,rgba(20,10,4,.55) 100%);}
+
+  .sun{position:absolute;top:7vh;left:9vw;width:13vmin;height:13vmin;border-radius:50%;z-index:1;
+    background:radial-gradient(circle,#fff3c4 0 38%,#ffcf5c 62%,#ff9d2e 100%);
+    box-shadow:0 0 9vmin 2.5vmin rgba(255,170,60,.38),0 0 22vmin 8vmin rgba(255,140,40,.16);
+    animation:sunPulse 5s ease-in-out infinite;}
+  @keyframes sunPulse{50%{transform:scale(1.05);box-shadow:0 0 11vmin 3.5vmin rgba(255,170,60,.45),0 0 26vmin 10vmin rgba(255,140,40,.2)}}
+
+  .haze{position:absolute;height:7vmin;border-radius:50%;filter:blur(10px);z-index:2;
+    background:rgba(255,165,75,.16);animation:hazeDrift 26s ease-in-out infinite alternate;}
+  .haze.h1{bottom:26vh;left:-6vw;width:70vmin}
+  .haze.h2{bottom:22vh;right:-8vw;width:60vmin;animation-duration:34s;animation-delay:-8s}
+  @keyframes hazeDrift{from{transform:translateX(-6vw)}to{transform:translateX(6vw)}}
+
+  .mt{position:absolute;left:0;width:100%;bottom:15vmin;will-change:transform}
+  .mt.far{height:36vh;z-index:3;background:linear-gradient(#41291a,#241a10);
+    clip-path:polygon(0 62%,12% 28%,26% 55%,38% 16%,52% 48%,66% 22%,80% 52%,92% 32%,100% 56%,100% 100%,0 100%);}
+  .mt.mid{height:27vh;z-index:3;background:linear-gradient(#543c27,#2c2015);
+    clip-path:polygon(0 72%,15% 38%,33% 66%,48% 28%,64% 60%,78% 36%,100% 64%,100% 100%,0 100%);}
+
+  /* Pit tambang berundak */
+  .pit{position:absolute;right:-4vmin;bottom:15vmin;width:48vmin;height:26vmin;z-index:4}
+  .pit div{position:absolute;left:50%;transform:translateX(-50%);
+    clip-path:polygon(6% 0,94% 0,100% 100%,0 100%);
+    box-shadow:inset 0 .5vmin rgba(255,205,120,.28);}
+  .pit .p1{bottom:0;width:48vmin;height:6.5vmin;background:#54402c}
+  .pit .p2{bottom:6.5vmin;width:39vmin;height:6.5vmin;background:#63492f}
+  .pit .p3{bottom:13vmin;width:30vmin;height:6.5vmin;background:#735534}
+  .pit .p4{bottom:19.5vmin;width:22vmin;height:6.5vmin;background:#83613c}
+
+  /* Headframe (menara tambang) */
+  .headframe{position:absolute;left:5vmin;bottom:16vmin;width:15vmin;height:23vmin;z-index:5}
+  .headframe .leg{position:absolute;bottom:0;width:1.1vmin;height:20vmin;background:linear-gradient(#7d7d7d,#3f3f3f)}
+  .headframe .leg.l{left:1.6vmin;transform:rotate(10deg);transform-origin:bottom}
+  .headframe .leg.r{right:1.6vmin;transform:rotate(-10deg);transform-origin:bottom}
+  .headframe .bar{position:absolute;height:.7vmin;background:#5b5b5b}
+  .headframe .b1{bottom:5vmin;left:2.4vmin;right:2.4vmin}
+  .headframe .b2{bottom:10vmin;left:3.6vmin;right:3.6vmin}
+  .headframe .b3{bottom:15vmin;left:4.8vmin;right:4.8vmin}
+  .headframe .wheelTop{position:absolute;top:0;left:50%;width:6vmin;height:6vmin;border-radius:50%;
+    margin-left:-3vmin;border:.7vmin solid #2b2b2b;
+    background:repeating-conic-gradient(var(--yellow) 0 18deg,#222 18deg 36deg);
+    animation:rot360 6s linear infinite}
+  .headframe .wheelTop::after{content:'';position:absolute;inset:32%;border-radius:50%;background:#111}
+  .headframe .hut{position:absolute;bottom:0;right:-3vmin;width:6.5vmin;height:4.4vmin;background:#6d4c2f;border-radius:.5vmin .5vmin 0 0;box-shadow:inset -1vmin 0 rgba(0,0,0,.25)}
+  .headframe .hut::after{content:'';position:absolute;bottom:0;left:2.4vmin;width:1.6vmin;height:2.6vmin;background:#2a1c0f}
+  @keyframes rot360{to{transform:rotate(360deg)}}
+
+  /* Tanah + jalan */
+  .bench{position:absolute;left:0;right:0;bottom:8vmin;height:9vmin;z-index:6;
+    background:linear-gradient(#6a4a2c,#3f2b17);
+    box-shadow:inset 0 .6vmin rgba(255,210,130,.22)}
+  .road{position:absolute;left:0;right:0;bottom:0;height:8vmin;z-index:7;
+    background:linear-gradient(#2c241c,#191310);border-top:.6vmin solid #14100c}
+  .road::after{content:'';position:absolute;left:0;right:0;top:50%;height:.8vmin;margin-top:-.4vmin;
+    background:repeating-linear-gradient(90deg,var(--yellow) 0 6vmin,transparent 6vmin 12vmin);
+    opacity:.85;animation:dashMove 1.4s linear infinite}
+  @keyframes dashMove{to{background-position:-12vmin 0}}
+
+  /* Batu-batu statis */
+  .boulder{position:absolute;z-index:8;filter:drop-shadow(0 .8vmin rgba(0,0,0,.35))}
+  .boulder.b1{left:26vmin;bottom:15.6vmin;width:8vmin;height:5.4vmin;background:linear-gradient(145deg,#9c8b78,#5d5142);
+    clip-path:polygon(8% 68%,0 34%,26% 6%,60% 0,92% 22%,100% 62%,78% 100%,20% 100%)}
+  .boulder.b2{left:35vmin;bottom:15.4vmin;width:5vmin;height:3.6vmin;background:linear-gradient(145deg,#8a7a68,#4f4437);
+    clip-path:polygon(0 60%,20% 12%,66% 0,100% 40%,88% 100%,12% 100%)}
+  .boulder.b3{right:34vmin;bottom:15.6vmin;width:6.5vmin;height:4.4vmin;background:linear-gradient(145deg,#a5907a,#5a4c3c);
+    clip-path:polygon(6% 58%,24% 8%,58% 0,100% 34%,92% 100%,10% 100%)}
+
+  /* Excavator */
+  .excavator{position:absolute;right:7vmin;bottom:8vmin;width:26vmin;height:17vmin;z-index:9;cursor:pointer}
+  .excavator .tracks{position:absolute;bottom:0;left:2vmin;width:22vmin;height:4.2vmin;background:#151515;border-radius:2.1vmin;box-shadow:inset 0 0 0 .5vmin #050505}
+  .excavator .tracks::after{content:'';position:absolute;inset:.9vmin 1vmin;
+    background-image:radial-gradient(circle,#4a4a4a 0 .9vmin,transparent 1vmin);
+    background-size:4.4vmin 100%;background-repeat:repeat-x}
+  .excavator .deck{position:absolute;bottom:3.7vmin;left:3vmin;width:19vmin;height:4.6vmin;
+    background:linear-gradient(#ffb03a,#e07b12);border-radius:1vmin 1.6vmin .6vmin .6vmin;
+    box-shadow:inset 0 -.9vmin rgba(0,0,0,.18)}
+  .excavator .cab{position:absolute;bottom:7.6vmin;left:4vmin;width:8vmin;height:6.4vmin;
+    background:linear-gradient(#ff9d2e,#e86f0a);border-radius:1.2vmin 2vmin .4vmin .4vmin;
+    box-shadow:inset 0 -.8vmin rgba(0,0,0,.15)}
+  .excavator .cab::before{content:'';position:absolute;left:.9vmin;top:.9vmin;width:3.6vmin;height:3vmin;
+    background:linear-gradient(135deg,#9fd8e8 0 30%,#263238 32%);border-radius:.5vmin}
+  .excavator .counter{position:absolute;bottom:7.9vmin;left:16.5vmin;width:5vmin;height:3.2vmin;background:#c9560a;border-radius:.6vmin}
+  .excavator .arm{position:absolute;bottom:8vmin;left:3.6vmin;width:0;height:0}
+  .excavator .boom{position:absolute;right:0;bottom:0;width:11vmin;height:1.7vmin;
+    background:linear-gradient(#ffcf5c,#eaa53a);border-radius:.9vmin;
+    transform-origin:100% 50%;animation:digBoom 3.6s ease-in-out infinite;
+    box-shadow:inset 0 -.45vmin rgba(0,0,0,.2)}
+  .excavator .stick{position:absolute;left:-.4vmin;top:.1vmin;width:1.5vmin;height:6.2vmin;
+    background:#e59a2f;border-radius:.7vmin;transform-origin:50% 8%;animation:digStick 3.6s ease-in-out infinite}
+  .excavator .bucket{position:absolute;bottom:-2.6vmin;left:-1.5vmin;width:3.8vmin;height:2.9vmin;background:#4b4b4b;
+    clip-path:polygon(0 0,100% 0,88% 72%,74% 100%,62% 72%,50% 100%,38% 72%,26% 100%,14% 72%);
+    transform-origin:80% 0;animation:digBucket 3.6s ease-in-out infinite}
+  @keyframes digBoom{0%,100%{transform:rotate(-14deg)}40%{transform:rotate(15deg)}55%{transform:rotate(10deg)}}
+  @keyframes digStick{0%,100%{transform:rotate(24deg)}40%{transform:rotate(-16deg)}55%{transform:rotate(-4deg)}}
+  @keyframes digBucket{0%,100%{transform:rotate(8deg)}40%{transform:rotate(48deg)}55%{transform:rotate(28deg)}}
+
+  /* Rambu lucu */
+  .signPost{position:absolute;right:35vmin;bottom:15.6vmin;z-index:9;width:5vmin;height:8vmin}
+  .signPost .pole{position:absolute;bottom:0;left:50%;width:.7vmin;height:5vmin;margin-left:-.35vmin;background:#5c4630}
+  .signPost .board{position:absolute;top:0;left:50%;width:4vmin;height:4vmin;margin-left:-2vmin;
+    background:var(--yellow);border:.45vmin solid #141414;transform:rotate(45deg);
+    display:flex;align-items:center;justify-content:center}
+  .signPost .board span{transform:rotate(-45deg);font-size:2vmin}
+
+  /* ============ TRUK TAMBANG ============ */
+  .truck{position:absolute;left:0;bottom:1.2vmin;width:40vmin;height:21vmin;z-index:11;
+    animation:drive 17s linear infinite;cursor:pointer}
+  @keyframes drive{from{transform:translateX(-58vw)}to{transform:translateX(116vw)}}
+  .truckInner{position:absolute;inset:0;animation:bob .5s ease-in-out infinite alternate}
+  @keyframes bob{to{transform:translateY(.35vmin)}}
+  .truck.jump .truckInner{animation:hop .55s cubic-bezier(.3,1.8,.5,1)}
+  @keyframes hop{30%{transform:translateY(-2.4vmin) rotate(-2deg)}70%{transform:translateY(.5vmin)}}
+  .truck .chassis{position:absolute;bottom:3vmin;left:.5vmin;width:39vmin;height:1.8vmin;background:#1c1712;border-radius:.4vmin}
+  .truck .bed{position:absolute;bottom:4.6vmin;left:0;width:26vmin;height:11vmin;
+    background:linear-gradient(#ffc93c,#e39b1c);
+    clip-path:polygon(0 0,100% 20%,100% 100%,0 100%);
+    box-shadow:inset 0 -1.6vmin rgba(0,0,0,.22)}
+  .truck .bed::before{content:'';position:absolute;inset:0;
+    background:repeating-linear-gradient(90deg,transparent 0 4.6vmin,rgba(0,0,0,.16) 4.6vmin 5.2vmin)}
+  .truck .bedLabel{position:absolute;bottom:2vmin;left:5vmin;font-family:'Russo One';font-size:2.4vmin;
+    color:#141310;letter-spacing:.05em;transform:skewX(-4deg);text-shadow:0 1px 0 rgba(255,255,255,.25)}
+  .truck .ore{position:absolute;border-radius:50%;background:radial-gradient(circle at 32% 28%,#a9743f,#5f3d1e)}
+  .truck .ore.o1{bottom:10.4vmin;left:3vmin;width:5vmin;height:3.6vmin}
+  .truck .ore.o2{bottom:10.8vmin;left:8vmin;width:6vmin;height:4.2vmin}
+  .truck .ore.o3{bottom:10.3vmin;left:14.5vmin;width:5vmin;height:3.4vmin}
+  .truck .ore.o4{bottom:11.4vmin;left:10.5vmin;width:3.4vmin;height:2.6vmin;background:radial-gradient(circle at 30% 25%,#ffe08a,#c8871f)}
+  .truck .cab{position:absolute;bottom:4.6vmin;right:0;width:11.5vmin;height:10.4vmin;
+    background:linear-gradient(#ff9d2e,#e86f0a);border-radius:1.2vmin 2.4vmin .5vmin .5vmin;
+    box-shadow:inset -1vmin 0 rgba(0,0,0,.12)}
+  .truck .cab::before{content:'';position:absolute;right:1vmin;top:1.1vmin;width:5vmin;height:3.6vmin;
+    background:linear-gradient(135deg,#b8e4f0 0 32%,#22303a 34%);border-radius:.6vmin .9vmin .3vmin .3vmin}
+  .truck .cab::after{content:'';position:absolute;right:-.4vmin;bottom:.9vmin;width:1.1vmin;height:1.4vmin;border-radius:.3vmin;
+    background:#fff3c4;box-shadow:0 0 2.4vmin 1vmin rgba(255,230,150,.55)}
+  .truck .exhaust{position:absolute;bottom:11vmin;left:26.6vmin;width:1.1vmin;height:6.4vmin;background:#2b2b2b;border-radius:.4vmin .4vmin 0 0}
+  .truck .puff{position:absolute;left:26vmin;bottom:17vmin;width:2.4vmin;height:2.4vmin;border-radius:50%;
+    background:rgba(210,200,190,.5);filter:blur(2px);opacity:0;animation:puffUp 1.8s linear infinite}
+  .truck .puff.pf2{animation-delay:.6s}.truck .puff.pf3{animation-delay:1.2s}
+  @keyframes puffUp{0%{opacity:0;transform:translate(0,0) scale(.5)}15%{opacity:.7}
+    100%{opacity:0;transform:translate(-3vmin,-7vmin) scale(2)}}
+  .truck .wheel{position:absolute;bottom:0;width:6.6vmin;height:6.6vmin;border-radius:50%;
+    background:#181818;box-shadow:inset 0 0 0 .7vmin #060606}
+  .truck .wheel .rim{position:absolute;inset:1.3vmin;border-radius:50%;
+    background:repeating-conic-gradient(#cfcfcf 0 26deg,#5a5a5a 26deg 60deg);
+    animation:rot360 .8s linear infinite}
+  .truck .wheel .rim::after{content:'';position:absolute;inset:34%;border-radius:50%;background:#2c2c2c}
+  .truck .w1{left:2.4vmin}.truck .w2{left:10.4vmin}.truck .w3{right:2vmin}
+  .hornTip{position:absolute;right:-2vmin;bottom:16.5vmin;background:var(--cream);color:#141310;
+    font-family:'Russo One';font-size:2.2vmin;padding:.35em .7em;border-radius:1vmin;border:.35vmin solid #141310;
+    opacity:0;transform:scale(.4);pointer-events:none;white-space:nowrap}
+  .hornTip::after{content:'';position:absolute;bottom:-1vmin;right:3vmin;border:.6vmin solid transparent;border-top-color:#141310}
+  .hornTip.show{animation:bubblePop .9s cubic-bezier(.2,1.6,.4,1) forwards}
+  @keyframes bubblePop{0%{opacity:0;transform:scale(.4)}20%{opacity:1;transform:scale(1.08)}80%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.9) translateY(-1vmin)}}
+
+  .frock{position:absolute;z-index:8;background:linear-gradient(145deg,#8f7a63,#54452f);
+    clip-path:polygon(20% 0,80% 10%,100% 55%,70% 100%,15% 90%,0 40%)}
+  .dustpop{position:absolute;z-index:12;width:6vmin;height:3vmin;border-radius:50%;pointer-events:none;
+    background:radial-gradient(circle,rgba(214,186,140,.65),rgba(214,186,140,0) 70%);
+    animation:dustPop .65s ease-out forwards}
+  @keyframes dustPop{from{transform:scale(.3);opacity:.9}to{transform:scale(1.9) translateY(-1vmin);opacity:0}}
+  .mote{position:absolute;z-index:12;border-radius:50%;pointer-events:none;filter:blur(1px);
+    background:rgba(233,196,140,.5);animation:moteFly var(--dur) linear forwards}
+  @keyframes moteFly{0%{opacity:0;transform:translate(0,0) scale(.6)}15%{opacity:.55}
+    100%{opacity:0;transform:translate(var(--dx),-10vmin) scale(1.2)}}
+
+  /* ============ KONTEN ============ */
+  .content{position:relative;z-index:30;min-height:100svh;display:flex;flex-direction:column;
+    align-items:center;justify-content:flex-start;text-align:center;padding:7.5vh 1rem 16vh}
+  .badge{display:inline-flex;align-items:center;gap:.55em;background:#1d150c;border:2px solid var(--yellow);
+    color:var(--yellow2);padding:.55em 1.1em;border-radius:999px;font-weight:700;letter-spacing:.14em;
+    font-size:clamp(.62rem,2.3vw,.85rem);text-transform:uppercase;box-shadow:0 6px 18px rgba(0,0,0,.4);
+    opacity:0;transform:translateY(-14px)}
+  .go .badge{animation:fadeDown .7s .15s cubic-bezier(.2,1.4,.4,1) both}
+  @keyframes fadeDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:none}}
+  .badge .dot{width:.6em;height:.6em;border-radius:50%;background:#ff5722;animation:blink 1.1s steps(1) infinite}
+
+  .title{position:relative;font-family:'Russo One';font-weight:400;line-height:1.06;margin:.55em 0 .15em;
+    font-size:clamp(2.5rem,11.5vw,6.6rem);color:var(--yellow2);letter-spacing:.02em;cursor:pointer;
+    text-shadow:0 .045em 0 #b45309,0 .1em 0 rgba(0,0,0,.35),0 0 34px rgba(255,180,60,.35);user-select:none}
+  .title .ch{display:inline-block;opacity:0;transform:translateY(46px) scale(.3) rotate(10deg)}
+  .go .title .ch{animation:popChar .75s cubic-bezier(.2,1.7,.4,1) forwards;
+    animation-delay:calc(.35s + var(--i)*.065s)}
+  .title .ch.sp{width:.45em}
+  .title:hover .ch{filter:brightness(1.08)}
+  @keyframes popChar{60%{opacity:1;transform:translateY(-8px) scale(1.12) rotate(-3deg)}
+    100%{opacity:1;transform:none}}
+  .spark{position:absolute;font-size:.32em;animation:twinkle 2.3s ease-in-out infinite;pointer-events:none}
+  .spark.s1{top:-.55em;left:-.45em}
+  .spark.s2{top:-.65em;right:14%;animation-delay:.8s}
+  .spark.s3{bottom:-.15em;right:-.55em;animation-delay:1.5s}
+  @keyframes twinkle{0%,100%{opacity:.25;transform:scale(.7) rotate(-12deg)}50%{opacity:1;transform:scale(1.25) rotate(12deg)}}
+
+  .tagline{font-size:clamp(.85rem,2.6vw,1.1rem);color:#ffe6b8;font-weight:500;opacity:0}
+  .go .tagline{animation:fadeUp .8s 1.5s both}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+  /* Kartu ucapan */
+  .card{width:min(92vw,620px);margin-top:1.6rem;background:#221809;border:3px solid #f2c14e;border-radius:16px;
+    overflow:hidden;text-align:left;box-shadow:0 24px 55px rgba(0,0,0,.55),0 0 0 6px rgba(247,201,72,.08);
+    opacity:0;transform:translateY(50px) scale(.95)}
+  .go .card{animation:cardUp .9s 1.8s cubic-bezier(.2,.9,.3,1.15) both}
+  @keyframes cardUp{to{opacity:1;transform:none}}
+  .card .stripe{height:.85rem;background:repeating-linear-gradient(45deg,var(--yellow) 0 14px,#161616 14px 28px);
+    border-bottom:2px solid #161616;animation:hazardMove 3s linear infinite}
+  @keyframes hazardMove{to{background-position:39.6px 0}}
+  .card-head{background:var(--yellow);color:#171310;font-family:'Russo One';text-align:center;
+    padding:.55em .6em;letter-spacing:.06em;font-size:clamp(.85rem,3vw,1.05rem);border-bottom:3px solid #171310}
+  .card-body{padding:1.15rem 1.3rem 1.4rem}
+  .msg{font-size:clamp(1rem,3.2vw,1.22rem);line-height:1.75;color:#ffe9c2;min-height:7.5em}
+  .cursor{display:inline-block;width:.55ch;height:1.05em;background:var(--yellow);margin-left:2px;
+    vertical-align:-.15em;animation:blink .9s steps(1) infinite}
+  .cursor.off{display:none}
+  @keyframes blink{50%{opacity:0}}
+  .chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:.4rem 0 1rem}
+  .chip{background:#2c2013;border:1.5px solid #8a6a3f;color:#ffd98a;font-size:clamp(.66rem,2.2vw,.8rem);
+    font-weight:700;padding:.4em .85em;border-radius:999px;opacity:0;transform:scale(.5)}
+  .card.revealed .chip{animation:chipPop .5s cubic-bezier(.2,1.7,.4,1) both}
+  .card.revealed .chip:nth-child(1){animation-delay:.45s}
+  .card.revealed .chip:nth-child(2){animation-delay:.58s}
+  .card.revealed .chip:nth-child(3){animation-delay:.71s}
+  .card.revealed .chip:nth-child(4){animation-delay:.84s}
+  .card.revealed .chip:nth-child(5){animation-delay:.97s}
+  @keyframes chipPop{to{opacity:1;transform:scale(1)}}
+  .busline{background:rgba(247,201,72,.12);border-left:4px solid var(--orange);padding:.8em 1em;
+    border-radius:8px;color:#ffdf9e;font-weight:500;font-size:clamp(.9rem,2.9vw,1.05rem);line-height:1.6;opacity:0}
+  .card.revealed .busline{animation:fadeUp .8s 1.25s both}
+  .stamp{position:absolute;right:1rem;top:5.4rem;font-family:'Russo One';font-size:.7rem;color:#ff9d2e;
+    border:2px dashed #ff9d2e;border-radius:6px;padding:.35em .6em;transform:rotate(8deg);opacity:.85;letter-spacing:.08em}
+
+  .hint{margin-top:1.4rem;font-size:clamp(.8rem,2.6vw,.95rem);color:rgba(255,246,227,.75);opacity:0}
+  .go .hint{animation:fadeIn 1s 6.4s both}
+  .hint .truckEmo{display:inline-block;animation:wiggle 1.6s ease-in-out infinite}
+  @keyframes wiggle{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px) rotate(-4deg)}75%{transform:translateX(4px) rotate(4deg)}}
+
+  /* ============ TOPBAR / MUSIK ============ */
+  #musicBtn{position:fixed;top:14px;right:14px;z-index:60;width:48px;height:48px;border-radius:50%;
+    background:#1d150c;border:2.5px solid var(--yellow);font-size:1.25rem;cursor:pointer;color:var(--cream);
+    box-shadow:0 8px 20px rgba(0,0,0,.45);opacity:0;pointer-events:none;transform:translateY(-12px);
+    transition:opacity .6s,transform .6s}
+  .go #musicBtn{opacity:1;pointer-events:auto;transform:none}
+  #musicBtn:hover{transform:scale(1.1)}
+  #musicBtn:active{transform:scale(.94)}
+
+  /* ============ CONFETTI & BALLOON ============ */
+  .fxLayer{position:fixed;inset:0;z-index:35;pointer-events:none;overflow:hidden}
+  .conf{position:absolute;top:-6vh;animation:confFall var(--cd) cubic-bezier(.25,.45,.6,1) forwards}
+  @keyframes confFall{0%{transform:translate3d(0,0,0) rotate(0)}90%{opacity:1}
+    100%{transform:translate3d(var(--dx),112vh,0) rotate(var(--rot));opacity:.85}}
+  .balloon{position:absolute;bottom:-18vh;animation:rise var(--rt) linear forwards}
+  @keyframes rise{to{transform:translateY(-130vh)}}
+  .balloon .sway{animation:sway 2.6s ease-in-out infinite alternate}
+  @keyframes sway{from{transform:translateX(-1.4vmin) rotate(-3deg)}to{transform:translateX(1.4vmin) rotate(3deg)}}
+  .b-body{position:relative;width:6vmin;height:7.4vmin;border-radius:50% 50% 47% 53%;
+    background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.75) 0 12%,var(--bc) 40%)}
+  .b-body::before{content:'';position:absolute;bottom:-1vmin;left:50%;margin-left:-.7vmin;
+    border:.7vmin solid transparent;border-top:1vmin solid var(--bc)}
+  .b-body::after{content:'';position:absolute;top:100%;left:50%;width:2px;height:9vmin;
+    background:rgba(255,246,227,.6);transform:rotate(3deg)}
+
+  /* ============ GATE / GERBANG ============ */
+  .gate{position:fixed;inset:0;z-index:90;display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(120% 120% at 50% 18%,rgba(64,41,20,.94),rgba(13,9,5,.985));
+    transition:opacity .9s ease;transition-delay:0s}
+  .gate::before,.gate::after{content:'';position:absolute;left:0;right:0;height:3.2vh;z-index:1;
+    background:repeating-linear-gradient(45deg,var(--yellow) 0 20px,#151515 20px 40px);
+    animation:hazardMove 4s linear infinite}
+  .gate::before{top:0}.gate::after{bottom:0}
+  .gate.open{opacity:0;pointer-events:none;transition-delay:.95s}
+  .arm{position:absolute;top:50%;height:3.2vh;width:56vw;z-index:2;
+    background:repeating-linear-gradient(45deg,var(--yellow) 0 24px,#191919 24px 48px);
+    border:2px solid #000;box-shadow:0 6px 18px rgba(0,0,0,.5);
+    transition:transform 1.05s cubic-bezier(.55,-.25,.3,1.2)}
+  .arm-l{right:50%;transform:translateY(-50%);transform-origin:100% 50%}
+  .arm-r{left:50%;transform:translateY(-50%);transform-origin:0 50%}
+  .gate.open .arm-l{transform:translateY(-50%) rotate(-74deg)}
+  .gate.open .arm-r{transform:translateY(-50%) rotate(74deg)}
+  .hinge{position:absolute;top:50%;left:50%;width:4.5vmin;height:4.5vmin;margin:-2.25vmin;z-index:3;
+    border-radius:50%;background:radial-gradient(circle at 35% 30%,#888,#2c2c2c);border:3px solid #000}
+  .panelWrap{position:relative;z-index:5;width:min(92vw,540px);padding:11px;border-radius:20px;
+    background:repeating-linear-gradient(45deg,var(--yellow) 0 18px,#161616 18px 36px);
+    box-shadow:0 30px 70px rgba(0,0,0,.6)}
+  .gate.open .panelWrap{animation:panelOut .6s .1s forwards}
+  @keyframes panelOut{to{opacity:0;transform:translateY(-34px) scale(.9)}}
+  .panel{background:#1c130a;border-radius:12px;padding:clamp(1.4rem,5vw,2.4rem);text-align:center}
+  .panel h2{font-family:'Russo One';font-weight:400;color:var(--yellow);letter-spacing:.05em;
+    font-size:clamp(1.15rem,5.4vw,1.9rem);text-shadow:0 3px 0 rgba(0,0,0,.5);margin-bottom:.7rem}
+  .panel p{color:#ffe0ac;font-size:clamp(.88rem,3.4vw,1.05rem);line-height:1.65;margin-bottom:1.5rem}
+  .openBtn{font-family:'Russo One';font-weight:400;font-size:clamp(1.05rem,4.4vw,1.45rem);
+    letter-spacing:.04em;color:#161309;background:linear-gradient(#ffd23f,#f5a623);
+    border:3px solid #161309;border-radius:14px;padding:.75em 1.5em;cursor:pointer;
+    box-shadow:0 7px 0 #7a4a12,0 14px 30px rgba(0,0,0,.45);animation:invite 2.1s ease-in-out infinite;
+    transition:transform .15s,box-shadow .15s}
+  .openBtn:hover{transform:translateY(-3px);box-shadow:0 10px 0 #7a4a12,0 18px 34px rgba(0,0,0,.5)}
+  .openBtn:active{transform:translateY(3px);box-shadow:0 2px 0 #7a4a12}
+  @keyframes invite{0%,100%{filter:drop-shadow(0 0 0 rgba(247,201,72,0))}
+    50%{filter:drop-shadow(0 0 18px rgba(247,201,72,.75))}}
+  .panel small{display:block;margin-top:1.1rem;color:rgba(255,224,172,.6);font-size:.75rem;letter-spacing:.1em}
+
+  @media (max-width:640px){
+    .excavator{right:2vmin}
+    .headframe{left:2vmin}
+    .signPost{display:none}
+    .boulder.b3{right:30vmin}
+    .content{padding-top:6vh}
+    .stamp{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= SCENE TAMBANG ================= -->
+<div class="scene" id="scene" aria-hidden="true">
+  <div class="sun"></div>
+  <div class="haze h1"></div>
+  <div class="haze h2"></div>
+  <div class="mt far" data-depth="6"></div>
+  <div class="mt mid" data-depth="12"></div>
+  <div class="pit" data-depth="16"><div class="p1"></div><div class="p2"></div><div class="p3"></div><div class="p4"></div></div>
+
+  <div class="headframe">
+    <div class="leg l"></div><div class="leg r"></div>
+    <div class="bar b1"></div><div class="bar b2"></div><div class="bar b3"></div>
+    <div class="hut"></div>
+    <div class="wheelTop"></div>
+  </div>
+
+  <div class="bench"></div>
+  <div class="road"></div>
+
+  <div class="boulder b1"></div>
+  <div class="boulder b2"></div>
+  <div class="boulder b3"></div>
+
+  <div class="signPost"><div class="pole"></div><div class="board"><span>🎂</span></div></div>
+
+  <div class="excavator" id="excavator" title="Klik buat gali semangat!">
+    <div class="tracks"></div>
+    <div class="deck"></div><div class="counter"></div>
+    <div class="cab"></div>
+    <div class="arm">
+      <div class="boom"><div class="stick"><div class="bucket"></div></div></div>
+    </div>
+  </div>
+
+  <div class="truck" id="truck" title="Klakson!">
+    <div class="truckInner">
+      <div class="chassis"></div>
+      <div class="bed"></div>
+      <div class="ore o1"></div><div class="ore o2"></div><div class="ore o3"></div><div class="ore o4"></div>
+      <div class="bedLabel">HBD RENATA</div>
+      <div class="cab"></div>
+      <div class="exhaust"></div>
+      <div class="puff"></div><div class="puff pf2"></div><div class="puff pf3"></div>
+      <div class="wheel w1"><div class="rim"></div></div>
+      <div class="wheel w2"><div class="rim"></div></div>
+      <div class="wheel w3"><div class="rim"></div></div>
+      <div class="hornTip" id="hornTip">TIN TIN!! 📯</div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= KONTEN ================= -->
+<main class="content">
+  <div class="badge"><span class="dot"></span> SITE RENATA • OPERASI HBD-01 ⛏️</div>
+  <h1 class="title" id="title" aria-label="HBD RENATA 🎉">
+    <span class="spark s1">✨</span><span class="spark s2">✨</span><span class="spark s3">✨</span>
+  </h1>
+  <p class="tagline">— Muatan ucapan spesial baru aja tiba di lokasi 🚛 —</p>
+
+  <section class="card" id="card" style="position:relative">
+    <div class="stripe"></div>
+    <div class="card-head">🎂 LAPORAN UCAPAN RESMI 🎂</div>
+    <div class="stamp">HAPPY B-DAY!</div>
+    <div class="card-body">
+      <p class="msg"><span id="msgText"></span><span class="cursor" id="cursor"></span></p>
+      <div class="chips">
+        <span class="chip">🎈 Umur: +1 LEVEL</span>
+        <span class="chip">🛡️ Sehat: AKTIF</span>
+        <span class="chip">✨ Sukses: ON PROGRESS</span>
+        <span class="chip">🎯 Harapan: LOADED 100%</span>
+        <span class="chip">🚌 Bus Crew: SELAMANYA</span>
+      </div>
+      <p class="busline">Dari teman satu bus, buat Renata yang hari ini lagi bertambah umur! 🚌💛 Semoga perjalanan kita (dan hidupmu) makin seru!</p>
+    </div>
+  </section>
+
+  <p class="hint"><span class="truckEmo">🚚</span> Psst… coba klik truk tambangnya, terus klik judulnya juga!</p>
+</main>
+
+<!-- ================= FX & TOPBAR ================= -->
+<div class="fxLayer" id="fxLayer"></div>
+<button id="musicBtn" aria-label="Musik on/off">🔇</button>
+
+<!-- ================= GERBANG ================= -->
+<div class="gate" id="gate">
+  <div class="arm arm-l"></div>
+  <div class="arm arm-r"></div>
+  <div class="hinge"></div>
+  <div class="panelWrap">
+    <div class="panel">
+      <h2>⚠️ AREA TAMBANG RENATA ⚠️</h2>
+      <p>Terdeteksi <b style="color:var(--yellow2)">muatan misterius</b> di lokasi ini…<br>
+      Akses hanya diberikan kepada yang hari ini <b style="color:var(--orange)">berulang tahun</b> 😉</p>
+      <button class="openBtn" id="openBtn">Buka Ucapannya 🎁</button>
+      <small>🚧 WAJIB PAKAI HELM KALAU KETEMU YANG MANIS-MANIS 🚧</small>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var $ = function(s){ return document.querySelector(s); };
+  var body = document.body;
+  var opened = false;
+
+  /* ---------- Judul: pecah jadi karakter ---------- */
+  var titleEl = $('#title');
+  var TITLE_TEXT = 'HBD RENATA 🎉';
+  Array.from(TITLE_TEXT).forEach(function(chr, idx){
+    var sp = document.createElement('span');
+    sp.className = 'ch' + (chr === ' ' ? ' sp' : '');
+    sp.style.setProperty('--i', idx);
+    sp.textContent = chr === ' ' ? '\u00A0' : chr;
+    titleEl.appendChild(sp);
+  });
+
+  /* ================= AUDIO (Web Audio API, tanpa file) ================= */
+  var actx = null, musicGain = null, musicOn = false, musicTimer = null;
+  var BEAT = 0.5;
+  var NOTE = {G4:392, A4:440, B4:493.88, C5:523.25, D5:587.33, E5:659.25, F5:698.46, G5:783.99};
+  var MELODY = [
+    ['G4',.75],['G4',.25],['A4',1],['G4',1],['C5',1],['B4',2],
+    ['G4',.75],['G4',.25],['A4',1],['G4',1],['D5',1],['C5',2],
+    ['G4',.75],['G4',.25],['G5',1],['E5',1],['C5',1],['B4',1],['A4',2],
+    ['F5',.75],['F5',.25],['E5',1],['C5',1],['D5',1],['C5',2.5]
+  ];
+  function ensureAudio(){
+    if(!actx){
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if(!AC) return false;
+      actx = new AC();
+      musicGain = actx.createGain();
+      musicGain.gain.value = 0;
+      musicGain.connect(actx.destination);
+    }
+    if(actx.state === 'suspended') actx.resume();
+    return true;
+  }
+  function playNote(freq, t, dur){
+    var o = actx.createOscillator(), g = actx.createGain();
+    o.type = 'triangle'; o.frequency.value = freq;
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.linearRampToValueAtTime(0.15, t + 0.03);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur * 0.95);
+    o.connect(g); g.connect(musicGain);
+    o.start(t); o.stop(t + dur + 0.05);
+    var o2 = actx.createOscillator(), g2 = actx.createGain();
+    o2.type = 'sine'; o2.frequency.value = freq / 2;
+    g2.gain.setValueAtTime(0.0001, t);
+    g2.gain.linearRampToValueAtTime(0.05, t + 0.04);
+    g2.gain.exponentialRampToValueAtTime(0.0001, t + dur * 0.9);
+    o2.connect(g2); g2.connect(musicGain);
+    o2.start(t); o2.stop(t + dur + 0.05);
+  }
+  function scheduleLoop(){
+    if(!musicOn || !actx) return;
+    var t = actx.currentTime + 0.08, i;
+    for(i = 0; i < MELODY.length; i++){
+      var dur = MELODY[i][1] * BEAT;
+      playNote(NOTE[MELODY[i][0]], t, dur);
+      t += dur;
+    }
+    var waitMs = (t - actx.currentTime) * 1000 + 1400;
+    musicTimer = setTimeout(scheduleLoop, waitMs);
+  }
+  function startMusic(){
+    if(!ensureAudio()) return;
+    musicOn = true;
+    musicGain.gain.cancelScheduledValues(actx.currentTime);
+    musicGain.gain.setTargetAtTime(1, actx.currentTime, 0.15);
+    clearTimeout(musicTimer);
+    scheduleLoop();
+    $('#musicBtn').textContent = '🔊';
+  }
+  function stopMusic(){
+    musicOn = false;
+    clearTimeout(musicTimer);
+    if(actx && musicGain) musicGain.gain.setTargetAtTime(0, actx.currentTime, 0.1);
+    $('#musicBtn').textContent = '🔇';
+  }
+  function honkSound(){
+    if(!ensureAudio()) return;
+    var t = actx.currentTime;
+    [330, 415].forEach(function(f){
+      var o = actx.createOscillator(), g = actx.createGain();
+      o.type = 'sawtooth'; o.frequency.value = f;
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.linearRampToValueAtTime(0.09, t + 0.02);
+      g.gain.setValueAtTime(0.09, t + 0.22);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.34);
+      o.connect(g); g.connect(actx.destination);
+      o.start(t); o.stop(t + 0.36);
+    });
+  }
+  function digSound(){
+    if(!ensureAudio()) return;
+    var t = actx.currentTime;
+    var o = actx.createOscillator(), g = actx.createGain();
+    o.type = 'sine'; o.frequency.setValueAtTime(140, t);
+    o.frequency.exponentialRampToValueAtTime(55, t + 0.22);
+    g.gain.setValueAtTime(0.12, t);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.25);
+    o.connect(g); g.connect(actx.destination);
+    o.start(t); o.stop(t + 0.27);
+  }
+  function openSweep(){
+    if(!ensureAudio()) return;
+    var t = actx.currentTime;
+    var o = actx.createOscillator(), g = actx.createGain();
+    o.type = 'square';
+    o.frequency.setValueAtTime(180, t);
+    o.frequency.exponentialRampToValueAtTime(760, t + 0.45);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.linearRampToValueAtTime(0.08, t + 0.05);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.5);
+    o.connect(g); g.connect(actx.destination);
+    o.start(t); o.stop(t + 0.52);
+  }
+  $('#musicBtn').addEventListener('click', function(){
+    if(musicOn){ stopMusic(); } else { startMusic(); }
+  });
+
+  /* ================= CONFETTI & BALON ================= */
+  var fxLayer = $('#fxLayer');
+  var CONF_COLORS = ['#ffd23f','#ff7f11','#f7b733','#8d6e3a','#2b2b2b','#fff3d6','#e85d04'];
+  function burstConfetti(count, centerX){
+    var i;
+    for(i = 0; i < count; i++){
+      var c = document.createElement('span');
+      c.className = 'conf';
+      var size = (1.1 + Math.random() * 1.7);
+      c.style.left = (centerX + (Math.random() - 0.5) * 40) + 'vw';
+      c.style.width = size + 'vmin';
+      c.style.height = (size * (0.5 + Math.random())) + 'vmin';
+      c.style.background = CONF_COLORS[Math.floor(Math.random() * CONF_COLORS.length)];
+      c.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+      c.style.setProperty('--dx', ((Math.random() - 0.5) * 28) + 'vw');
+      c.style.setProperty('--rot', (Math.random() * 760 - 380) + 'deg');
+      c.style.setProperty('--cd', (2.6 + Math.random() * 2.4) + 's');
+      c.addEventListener('animationend', function(){ this.remove(); });
+      fxLayer.appendChild(c);
+    }
+  }
+  var BAL_COLORS = ['#ffd23f','#ff8c1a','#fff3d6','#a9743f','#6b6b6b','#e85d04'];
+  function spawnBalloon(delayMs){
+    setTimeout(function(){
+      var b = document.createElement('div');
+      b.className = 'balloon';
+      b.style.left = (6 + Math.random() * 86) + 'vw';
+      b.style.setProperty('--rt', (6 + Math.random() * 4) + 's');
+      var col = BAL_COLORS[Math.floor(Math.random() * BAL_COLORS.length)];
+      b.innerHTML = '<div class="sway"><div class="b-body" style="--bc:' + col + '"></div></div>';
+      b.addEventListener('animationend', function(){ this.remove(); });
+      fxLayer.appendChild(b);
+    }, delayMs);
+  }
+  function releaseBalloons(n){
+    var i;
+    for(i = 0; i < n; i++) spawnBalloon(i * 420);
+  }
+
+  /* ================= DEBU, BATU JATUH ================= */
+  var scene = $('#scene');
+  var vm = function(){ return Math.min(window.innerWidth, window.innerHeight) / 100; };
+  var loopsStarted = false;
+  function startLoops(){
+    if(loopsStarted) return;
+    loopsStarted = true;
+    /* debu ambient */
+    setInterval(function(){
+      if(document.hidden) return;
+      var dust = scene.querySelectorAll('.mote');
+      if(dust.length > 30) return;
+      var m = document.createElement('div');
+      m.className = 'mote';
+      var s = (0.6 + Math.random() * 1.4) * vm();
+      m.style.width = s + 'px'; m.style.height = s + 'px';
+      m.style.left = (Math.random() * 100) + 'vw';
+      m.style.bottom = (5 + Math.random() * 12) + 'vmin';
+      m.style.setProperty('--dx', ((Math.random() - 0.3) * 9) + 'vmin');
+      m.style.setProperty('--dur', (2.4 + Math.random() * 2.6) + 's');
+      m.addEventListener('animationend', function(){ this.remove(); });
+      scene.appendChild(m);
+    }, 420);
+    /* batu jatuh dari pit */
+    setInterval(function(){
+      if(document.hidden || Math.random() < 0.3) return;
+      var unit = vm();
+      var rock = document.createElement('div');
+      rock.className = 'frock';
+      var size = (1.4 + Math.random() * 1.8) * unit;
+      rock.style.width = size + 'px';
+      rock.style.height = size * 0.85 + 'px';
+      var startX = window.innerWidth * (0.62 + Math.random() * 0.3);
+      var startY = window.innerHeight - (38 + Math.random() * 8) * unit;
+      var landY  = window.innerHeight - (11 + Math.random() * 4) * unit;
+      rock.style.left = startX + 'px';
+      rock.style.top = startY + 'px';
+      scene.appendChild(rock);
+      var dx = (Math.random() - 0.5) * 4 * unit;
+      var dy = landY - startY;
+      var rot = 180 + Math.random() * 360;
+      var anim = rock.animate(
+        [{transform:'translate(0,0) rotate(0deg)'},
+         {transform:'translate(' + dx + 'px,' + dy + 'px) rotate(' + rot + 'deg)'}],
+        {duration: 850 + Math.random() * 500, easing:'cubic-bezier(.45,0,.9,1)'}
+      );
+      anim.onfinish = function(){
+        var puff = document.createElement('div');
+        puff.className = 'dustpop';
+        puff.style.left = (startX + dx - 2.5 * unit) + 'px';
+        puff.style.top = (landY - 1 * unit) + 'px';
+        scene.appendChild(puff);
+        setTimeout(function(){ puff.remove(); }, 700);
+        rock.remove();
+        if(Math.random() < 0.4) digSound();
+      };
+    }, 1700);
+    /* balon sesekali */
+    setInterval(function(){ if(!document.hidden) spawnBalloon(0); }, 8000);
+  }
+
+  /* ================= TYPEWRITER & URUTAN PESAN ================= */
+  var MSG = 'Selamat ulang tahun, Renata! Semoga panjang umur, sehat selalu, semakin sukses, dan semua harapanmu bisa tercapai.';
+  function typeMessage(){
+    var target = $('#msgText'), cursor = $('#cursor'), card = $('#card');
+    var i = 0;
+    var iv = setInterval(function(){
+      i++;
+      target.textContent = MSG.slice(0, i);
+      if(i >= MSG.length){
+        clearInterval(iv);
+        setTimeout(function(){ cursor.classList.add('off'); }, 500);
+        card.classList.add('revealed');
+      }
+    }, 27);
+  }
+
+  /* ================= INTERAKSI ================= */
+  var truckEl = $('#truck'), hornTip = $('#hornTip');
+  truckEl.addEventListener('click', function(){
+    honkSound();
+    truckEl.classList.remove('jump');
+    void truckEl.offsetWidth;
+    truckEl.classList.add('jump');
+    hornTip.classList.remove('show');
+    void hornTip.offsetWidth;
+    hornTip.classList.add('show');
+    burstConfetti(6, (truckEl.getBoundingClientRect().left / window.innerWidth) * 100);
+  });
+  $('#excavator').addEventListener('click', function(){
+    digSound();
+    var r = this.getBoundingClientRect();
+    burstConfetti(8, (r.left / window.innerWidth) * 100);
+  });
+  titleEl.addEventListener('click', function(){
+    burstConfetti(20, 50);
+    if(actx) honkSound();
+  });
+
+  /* parallax lembut */
+  if(window.matchMedia('(hover:hover)').matches){
+    window.addEventListener('pointermove', function(e){
+      var mx = (e.clientX / window.innerWidth - 0.5);
+      document.querySelectorAll('[data-depth]').forEach(function(el){
+        var d = parseFloat(el.getAttribute('data-depth'));
+        el.style.transform = 'translateX(' + (-mx * d) + 'px)';
+      });
+    });
+  }
+
+  /* ================= BUKA GERBANG ================= */
+  $('#openBtn').addEventListener('click', function(){
+    if(opened) return;
+    opened = true;
+    var gate = $('#gate');
+    openSweep();
+    startMusic();
+    gate.classList.add('open');
+    setTimeout(function(){ body.classList.add('go'); }, 350);
+    setTimeout(function(){ burstConfetti(90, 50); }, 950);
+    setTimeout(function(){ releaseBalloons(7); }, 1500);
+    setTimeout(function(){ gate.style.display = 'none'; }, 2200);
+    startLoops();
+    setTimeout(typeMessage, 2500);
+  });
+})();
+</script>
+</body>
+</html>
